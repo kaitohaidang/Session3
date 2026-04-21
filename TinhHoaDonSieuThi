@@ -1,0 +1,31 @@
+import java.util.Scanner;
+
+public class HoaDonSieuThi {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Nhap Ten Khach Hang");
+        String name = sc.nextLine();
+        System.out.println("Nhap Ten San pham");
+        String TenSp = sc.nextLine();
+        System.out.println("Nhap gia san pham");
+        Double gia = sc.nextDouble();
+        System.out.println("So luong mua");
+        int soluong = sc.nextInt();
+        System.out.println("The thanh vien");
+        boolean the = sc.nextBoolean();
+        double ThanhTien  = gia * soluong;
+        double GiamGia;
+        if (the == true) {
+            GiamGia =  ThanhTien * 0.1;
+        } else GiamGia = 0;
+        double VAT=ThanhTien*0.08;
+        double TongTien = ThanhTien-GiamGia+VAT;
+        System.out.println("Khach Hang"+name);
+        System.out.println("San Pham" +TenSp);
+        System.out.println("So Luong"+soluong);
+        System.out.println("Thanh Tien" + ThanhTien);
+        System.out.println("Giam Gia" + GiamGia);
+        System.out.println("Tien VAT "+ VAT);
+        System.out.println("Tong Tien Thanh Toan"+ TongTien);
+    }
+}
