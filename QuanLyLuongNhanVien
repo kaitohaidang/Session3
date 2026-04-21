@@ -1,0 +1,100 @@
+import java.util.Scanner;
+
+public class QuanLyLuong {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int count = 0;
+        double sumSalary = 0;
+        double maxSalary = -1;
+        double minSalary = 500000001; 
+        double totalBonus = 0;
+
+        while (true) {
+            System.out.println("\n=== QUẢN LÝ LƯƠNG NHÂN VIÊN ===");
+            System.out.println("1. Nhập lương nhân viên");
+            System.out.println("2. Hiển thị thống kê");
+            System.out.println("3. Tính tổng số tiền thưởng");
+            System.out.println("4. Thoát chương trình");
+            System.out.print("Mời bạn chọn chức năng: ");
+            
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    while (true) {
+                        System.out.print("Nhập lương (-1 để kết thúc): ");
+                        double salary = scanner.nextDouble();
+
+                        if (salary == -1) {
+                            break;
+                        }
+
+                        if (salary < 0 || salary > 500000000) {
+                            System.out.println("Cảnh báo: Lương không hợp lệ! Vui lòng nhập từ 0 đến 500 triệu.");
+                            continue;
+                        }
+
+                        if (salary < 5000000) {
+                            System.out.println("Phân loại: Thu nhập thấp");
+                        } else if (salary <= 15000000) {
+                            System.out.println("Phân loại: Thu nhập trung bình");
+                        } else if (salary <= 50000000) {
+                            System.out.println("Phân loại: Thu nhập khá");
+                        } else {
+                            System.out.println("Phân loại: Thu nhập cao");
+                        }
+
+                        if (salary <= 5000000) {
+                            totalBonus += salary * 0.05;
+                        } else if (salary <= 15000000) {
+                            totalBonus += salary * 0.10;
+                        } else if (salary <= 50000000) {
+                            totalBonus += salary * 0.15;
+                        } else if (salary <= 100000000) {
+                            totalBonus += salary * 0.20;
+                        } else {
+                            totalBonus += salary * 0.25;
+                        }
+
+                        count++;
+                        sumSalary += salary;
+                        if (maxSalary == -1 || salary > maxSalary) maxSalary = salary;
+                        if (minSalary == 500000001 || salary < minSalary) minSalary = salary;
+                    }
+                    break;
+
+                case 2:
+                    System.out.println("\n--- THỐNG KÊ ---");
+                    if (count == 0) {
+                        System.out.println("Chưa có dữ liệu");
+                    } else {
+                        double average = sumSalary / count;
+                        System.out.println("Số nhân viên đã nhập: " + count);
+                        System.out.printf("Lương trung bình: %,.0f VNĐ\n", average);
+                        System.out.printf("Lương cao nhất: %,.0f VNĐ\n", maxSalary);
+                        System.out.printf("Lương thấp nhất: %,.0f VNĐ\n", minSalary);
+                        System.out.printf("Tổng tiền lương: %,.0f VNĐ\n", sumSalary);
+                    }
+                    break;
+
+                case 3:
+                    System.out.println("\n--- TỔNG THƯỞNG ---");
+                    if (count == 0) {
+                        System.out.println("Chưa có dữ liệu");
+                    } else {
+                        System.out.printf("Tổng số tiền thưởng cho nhân viên: %,.0f VNĐ\n", totalBonus);
+                    }
+                    break;
+
+                case 4:
+                    System.out.println("Đã kết thúc chương trình.");
+                    scanner.close();
+                    System.exit(0);
+
+                default:
+                    System.out.println("Lựa chọn sai! Vui lòng chọn từ 1 đến 4.");
+                    break;
+            }
+        }
+    }
+}
