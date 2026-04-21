@@ -1,0 +1,78 @@
+import java.util.Scanner;
+
+public class QuanLyDiem {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int count = 0;
+        double sum = 0;
+        double max = -1;
+        double min = 11;
+
+        while (true) {
+            System.out.println("\n=== MENU ===");
+            System.out.println("1. Nhập điểm học viên");
+            System.out.println("2. Hiển thị thống kê");
+            System.out.println("3. Thoát chương trình");
+            System.out.print("Mời bạn chọn chức năng: ");
+            
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    while (true) {
+                        System.out.print("Nhập điểm (-1 để kết thúc): ");
+                        double score = scanner.nextDouble();
+
+                        if (score == -1) {
+                            break;
+                        }
+
+                        if (score < 0 || score > 10) {
+                            System.out.println("Cảnh báo: Điểm không hợp lệ! Vui lòng nhập từ 0 đến 10.");
+                            continue;
+                        }
+
+                        if (score < 5) {
+                            System.out.println("Xếp loại: Yếu");
+                        } else if (score < 7) {
+                            System.out.println("Xếp loại: Trung Bình");
+                        } else if (score < 8) {
+                            System.out.println("Xếp loại: Khá");
+                        } else if (score < 9) {
+                            System.out.println("Xếp loại: Giỏi");
+                        } else {
+                            System.out.println("Xếp loại: Xuất sắc");
+                        }
+
+                        count++;
+                        sum += score;
+                        if (max == -1 || score > max) max = score;
+                        if (min == 11 || score < min) min = score;
+                    }
+                    break;
+
+                case 2:
+                    System.out.println("\n--- THỐNG KÊ ---");
+                    if (count == 0) {
+                        System.out.println("Chưa có dữ liệu");
+                    } else {
+                        double average = sum / count;
+                        System.out.println("Số học viên đã nhập: " + count);
+                        System.out.printf("Điểm trung bình: %.2f\n", average);
+                        System.out.println("Điểm cao nhất: " + max);
+                        System.out.println("Điểm thấp nhất: " + min);
+                    }
+                    break;
+
+                case 3:
+                    System.out.println("Đã kết thúc chương trình.");
+                    scanner.close();
+                    System.exit(0);
+
+                default:
+                    System.out.println("Lựa chọn sai! Vui lòng chọn từ 1 đến 3.");
+                    break;
+            }
+        }
+    }
+}
